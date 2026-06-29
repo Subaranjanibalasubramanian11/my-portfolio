@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { label: "Contact",      href: "#contact"      },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onResumeClick }) {
   const navRef   = useRef(null);
   const logoRef  = useRef(null);
   const linksRef = useRef([]);
@@ -41,11 +41,7 @@ export default function Navbar() {
   useEffect(() => {
     const sections = NAV_ITEMS.map(n => document.querySelector(n.href));
     const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) setActive(`#${e.target.id}`);
-        });
-      },
+      (entries) => entries.forEach(e => { if (e.isIntersecting) setActive(`#${e.target.id}`); }),
       { threshold: 0.4 }
     );
     sections.forEach(s => s && obs.observe(s));
@@ -77,27 +73,24 @@ export default function Navbar() {
               {item.label}
             </a>
           ))}
-          {/* Resume always visible on desktop */}
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noreferrer"
+          {/* Resume button — desktop only */}
+          <button
+            onClick={onResumeClick}
             className="nav-resume-btn"
           >
-            Resume ↗
-          </a>
+            View Resume
+          </button>
         </div>
 
-        {/* Mobile: Resume button always visible + Hamburger */}
+        {/* Mobile right side: Resume button + Hamburger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noreferrer"
+          {/* Resume always visible on mobile navbar */}
+          <button
+            onClick={onResumeClick}
             className="nav-resume-btn-mobile"
           >
             Resume
-          </a>
+          </button>
           <button
             className={`hamburger${menuOpen ? " open" : ""}`}
             onClick={() => setMenuOpen(o => !o)}
@@ -108,22 +101,34 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile overlay menu */}
-      <div className={`mobile-menu${menuOpen ? " open" : ""}`}>
-        {NAV_ITEMS.map(item => (
-          <a
-            key={item.href}
-            href={item.href}
-            onClick={() => { setActive(item.href); setMenuOpen(false); }}
+      {/* Mobile overlay menu — only View Resume option */}
+      {menuOpen && (
+        <div className="mobile-menu open">
+          <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: 600 }}>Navigate</p>
+          {NAV_ITEMS.map(item => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => { setActive(item.href); setMenuOpen(false); }}
+            >
+              {item.label}
+            </a>
+          ))}
+          <div style={{ width: '80px', height: '2px', background: 'rgba(124,58,237,0.15)', margin: '10px 0' }} />
+          {/* View Resume in hamburger menu — opens modal, no new tab */}
+          <button
+            onClick={() => { setMenuOpen(false); onResumeClick(); }}
+            style={{
+              background: 'linear-gradient(135deg, var(--accent-1), var(--accent-2))',
+              color: '#fff', border: 'none', borderRadius: '14px',
+              padding: '16px 48px', fontSize: '22px', fontWeight: 800,
+              cursor: 'pointer', fontFamily: 'inherit',
+            }}
           >
-            {item.label}
-          </a>
-        ))}
-        <a href="/resume.pdf" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}
-           style={{ color: 'var(--accent-1)', fontWeight: 800 }}>
-          📄 Resume
-        </a>
-      </div>
+            View Resume
+          </button>
+        </div>
+      )}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-export default function Home() {
+export default function Home({ showResume, setShowResume }) {
   /* ── Typewriter ── */
   const roles = [
     "Aspiring Full Stack Developer",
@@ -12,7 +12,6 @@ export default function Home() {
   const [index,      setIndex]      = useState(0);
   const [charIndex,  setCharIndex]  = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [showResume, setShowResume] = useState(false);
 
   useEffect(() => {
     const current = roles[index];
@@ -51,22 +50,81 @@ export default function Home() {
 
   return (
     <>
-      <section id="home" className="home-container" style={{ justifyContent: 'center', textAlign: 'center' }}>
-        <div className="home-text" style={{ maxWidth: '820px', margin: '0 auto', alignItems: 'center' }}>
+      <section
+        id="home"
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '100px 24px 60px',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ maxWidth: '720px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
+          {/* Badge */}
           <div ref={badgeRef} className="hero-badge">
             <div className="badge-dot" />
             Open to opportunities
           </div>
 
-          <h1 className="hero-title" style={{ display: 'flex', justifyContent: 'center', gap: '18px', overflow: 'visible' }}>
-            <span ref={nameLeftRef} style={{ display: 'inline-block' }}>K B</span>
-            <span ref={nameRightRef} style={{ display: 'inline-block' }}>Subaranjani</span>
+          {/* Name */}
+          <h1 style={{
+            fontFamily: 'var(--font-head)',
+            fontSize: 'clamp(38px, 8vw, 68px)',
+            fontWeight: 800,
+            lineHeight: 1.1,
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '14px',
+            margin: '8px 0 14px',
+          }}>
+            <span
+              ref={nameLeftRef}
+              style={{
+                display: 'inline-block',
+                background: 'linear-gradient(135deg, var(--accent-1), var(--accent-2))',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >K B</span>
+            <span
+              ref={nameRightRef}
+              style={{
+                display: 'inline-block',
+                background: 'linear-gradient(135deg, var(--accent-2), var(--accent-pink))',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >Subaranjani</span>
           </h1>
 
-          <p ref={subtitleRef} className="hero-typing">{text}</p>
+          {/* Typing */}
+          <p ref={subtitleRef} style={{
+            fontFamily: 'var(--font-head)',
+            fontSize: 'clamp(16px, 3.5vw, 22px)',
+            fontWeight: 700,
+            color: 'var(--accent-3)',
+            minHeight: '34px',
+            margin: '0 0 20px',
+          }}>
+            {text}<span style={{ animation: 'blink 1s step-end infinite', color: 'var(--accent-2)' }}>|</span>
+          </p>
 
-          <p ref={descRef} className="hero-desc">
+          {/* Description */}
+          <p ref={descRef} style={{
+            fontSize: 'clamp(14px, 2.5vw, 16px)',
+            fontWeight: 500,
+            color: 'var(--text-secondary)',
+            lineHeight: 1.85,
+            maxWidth: '600px',
+            textAlign: 'center',
+            margin: '0 auto 36px',
+          }}>
             I don't just build websites — I create experiences people love to use.
             Aspiring to become a skilled Full Stack Developer, I am passionate
             about building intuitive and user-friendly web applications. With hands-on experience at
@@ -75,11 +133,17 @@ export default function Home() {
             and strive to create solutions that leave a lasting impression.
           </p>
 
-          <div ref={btnsRef} className="hero-btns" style={{ marginTop: '32px', justifyContent: 'center' }}>
-            <button className="btn-primary" onClick={() => setShowResume(true)}>
-              View Resume <span>↗</span>
+          {/* Button */}
+          <div ref={btnsRef} style={{ display: 'flex', justifyContent: 'center' }}>
+            <button
+              className="btn-primary"
+              onClick={() => setShowResume(true)}
+              style={{ fontSize: 'clamp(14px, 2vw, 15px)', padding: '14px 36px' }}
+            >
+              View Resume
             </button>
           </div>
+
         </div>
       </section>
 
@@ -92,15 +156,15 @@ export default function Home() {
             background: 'rgba(26,5,51,0.80)',
             backdropFilter: 'blur(10px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '20px',
+            padding: '16px',
           }}
         >
           <div
             onClick={e => e.stopPropagation()}
             style={{
-              background: 'rgba(255,255,255,0.95)',
+              background: 'rgba(255,255,255,0.97)',
               borderRadius: '20px',
-              width: '100%', maxWidth: '850px',
+              width: '100%', maxWidth: '860px',
               height: '90vh',
               display: 'flex', flexDirection: 'column',
               overflow: 'hidden',
@@ -111,11 +175,12 @@ export default function Home() {
             {/* Modal header */}
             <div style={{
               display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-              padding: '16px 24px',
+              padding: '14px 20px',
               borderBottom: '1px solid rgba(124,58,237,0.12)',
               background: 'linear-gradient(135deg, rgba(124,58,237,0.06), rgba(219,39,119,0.04))',
+              flexWrap: 'wrap', gap: '10px',
             }}>
-              <span style={{ fontWeight: 700, color: '#1a0533', fontSize: '15px' }}>
+              <span style={{ fontWeight: 700, color: '#1a0533', fontSize: '14px' }}>
                 📄 K B Subaranjani — Resume
               </span>
               <div style={{ display: 'flex', gap: '10px' }}>
@@ -123,7 +188,7 @@ export default function Home() {
                   href="/resume.pdf"
                   download
                   style={{
-                    padding: '7px 18px', borderRadius: '8px', fontSize: '13px', fontWeight: 700,
+                    padding: '7px 16px', borderRadius: '8px', fontSize: '13px', fontWeight: 700,
                     background: 'linear-gradient(135deg, #7c3aed, #db2777)',
                     color: '#fff', textDecoration: 'none',
                   }}
@@ -133,9 +198,10 @@ export default function Home() {
                 <button
                   onClick={() => setShowResume(false)}
                   style={{
-                    padding: '7px 14px', borderRadius: '8px', border: '1.5px solid rgba(124,58,237,0.25)',
-                    background: 'transparent', cursor: 'pointer', fontSize: '13px', fontWeight: 700,
-                    color: '#7c3aed',
+                    padding: '7px 14px', borderRadius: '8px',
+                    border: '1.5px solid rgba(124,58,237,0.25)',
+                    background: 'transparent', cursor: 'pointer',
+                    fontSize: '13px', fontWeight: 700, color: '#7c3aed',
                   }}
                 >
                   ✕ Close
@@ -143,7 +209,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* PDF Viewer */}
+            {/* PDF iframe */}
             <iframe
               src="/resume.pdf"
               title="Resume"
