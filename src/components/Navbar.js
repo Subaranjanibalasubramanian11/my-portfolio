@@ -70,7 +70,7 @@ export default function Navbar() {
           {NAV_ITEMS.map((item, i) => (
             <a
               key={item.href}
-              href={item.external ? process.env.PUBLIC_URL + item.href : item.href}
+              href={item.external ? item.href : item.href}
               target={item.external ? "_blank" : "_self"}
               rel={item.external ? "noreferrer" : ""}
               ref={el => (linksRef.current[i] = el)}
@@ -101,7 +101,7 @@ export default function Navbar() {
         {NAV_ITEMS.map(item => (
           <a
             key={item.href}
-            href={item.external ? process.env.PUBLIC_URL + item.href : item.href}
+            href={item.external ? item.href : item.href}
             target={item.external ? "_blank" : "_self"}
             rel={item.external ? "noreferrer" : ""}
             onClick={() => {

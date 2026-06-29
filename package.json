@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://subaranjanibalasubramanian11.github.io/my-portfolio",
+  "homepage": "/",
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@testing-library/dom": "^10.4.1",

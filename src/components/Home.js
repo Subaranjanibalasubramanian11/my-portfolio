@@ -78,7 +78,7 @@ export default function Home() {
         </p>
 
         <div ref={btnsRef} className="hero-btns" style={{ marginTop: '32px', justifyContent: 'center' }}>
-          <a href={process.env.PUBLIC_URL + "/resume.pdf"} target="_blank" rel="noreferrer" className="btn-primary">
+          <a href="/resume.pdf" target="_blank" rel="noreferrer" className="btn-primary">
             View Resume <span>↗</span>
           </a>
         </div>
