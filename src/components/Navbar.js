@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { label: "Contact",      href: "#contact"      },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onResumeClick }) {
   const navRef   = useRef(null);
   const logoRef  = useRef(null);
   const linksRef = useRef([]);
@@ -67,14 +67,12 @@ export default function Navbar() {
       </div>
 
       {/* Resume button — always visible on both desktop & mobile */}
-      <a
-        href="/resume.pdf"
-        target="_blank"
-        rel="noreferrer"
+      <button
+        onClick={onResumeClick}
         className="nav-resume-btn"
       >
         View Resume
-      </a>
+      </button>
     </nav>
   );
 }
