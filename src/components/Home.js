@@ -209,9 +209,9 @@ export default function Home({ showResume, setShowResume }) {
               </div>
             </div>
 
-            {/* PDF iframe */}
+            {/* PDF iframe (Google Docs Viewer ensures it displays on mobile) */}
             <iframe
-              src="/resume.pdf"
+              src="https://docs.google.com/gview?url=https://my-portfolio-ivory-two-94.vercel.app/resume.pdf&embedded=true"
               title="Resume"
               style={{ flex: 1, border: 'none', width: '100%' }}
             />
