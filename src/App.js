@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import Cursor from "./components/Cursor";
 import Navbar from "./components/Navbar";
@@ -11,14 +10,12 @@ import Certificates from "./components/Certificates";
 import Contact from "./components/Contact";
 
 function App() {
-  const [showResume, setShowResume] = useState(false);
-
   return (
     <>
       <Cursor />
-      <Navbar onResumeClick={() => setShowResume(true)} />
+      <Navbar />
       <main>
-        <Home showResume={showResume} setShowResume={setShowResume} />
+        <Home />
         <About />
         <Experience />
         <Skills />

@@ -586,9 +586,8 @@ h2 {
 @media (max-width:768px) {
   section { padding:80px 5% 60px; }
   .nav-links { display:none; }
-  .hamburger { display:flex; }
-  .nav-resume-btn { display:none; }           /* hide desktop resume btn */
-  .nav-resume-btn-mobile { display:inline-flex; } /* show mobile resume btn */
+  .hamburger { display:none; } /* ensure hamburger is fully hidden */
+  /* Keep nav-resume-btn visible on mobile */
 
   .home-container { flex-direction:column-reverse; text-align:center; justify-content:center; min-height:100vh; padding-top:80px; gap:36px; }
   .hero-title { font-size:38px; }
