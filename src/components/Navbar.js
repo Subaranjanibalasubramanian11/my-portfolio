@@ -9,16 +9,15 @@ const NAV_ITEMS = [
   { label: "Projects",     href: "#projects"     },
   { label: "Certificates", href: "#certificates" },
   { label: "Contact",      href: "#contact"      },
-  { label: "Resume",       href: "/resume.pdf", external: true },
 ];
 
 export default function Navbar() {
-  const navRef    = useRef(null);
-  const logoRef   = useRef(null);
-  const linksRef  = useRef([]);
-  const [scrolled, setScrolled]   = useState(false);
-  const [menuOpen, setMenuOpen]   = useState(false);
-  const [active,   setActive]     = useState("#home");
+  const navRef   = useRef(null);
+  const logoRef  = useRef(null);
+  const linksRef = useRef([]);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [active,   setActive]   = useState("#home");
 
   /* ── Entrance animation ── */
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function Navbar() {
 
   /* ── Active section highlight ── */
   useEffect(() => {
-    const sections = NAV_ITEMS.filter(n => !n.external).map(n => document.querySelector(n.href));
+    const sections = NAV_ITEMS.map(n => document.querySelector(n.href));
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach(e => {
@@ -70,30 +69,43 @@ export default function Navbar() {
           {NAV_ITEMS.map((item, i) => (
             <a
               key={item.href}
-              href={item.external ? item.href : item.href}
-              target={item.external ? "_blank" : "_self"}
-              rel={item.external ? "noreferrer" : ""}
+              href={item.href}
               ref={el => (linksRef.current[i] = el)}
               className={active === item.href ? "active" : ""}
-              onClick={(e) => {
-                if (!item.external) {
-                  setActive(item.href);
-                }
-              }}
+              onClick={() => setActive(item.href)}
             >
               {item.label}
             </a>
           ))}
+          {/* Resume always visible on desktop */}
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="nav-resume-btn"
+          >
+            Resume ↗
+          </a>
         </div>
 
-        {/* Hamburger */}
-        <button
-          className={`hamburger${menuOpen ? " open" : ""}`}
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label="Toggle menu"
-        >
-          <span /><span /><span />
-        </button>
+        {/* Mobile: Resume button always visible + Hamburger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="nav-resume-btn-mobile"
+          >
+            Resume
+          </a>
+          <button
+            className={`hamburger${menuOpen ? " open" : ""}`}
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Toggle menu"
+          >
+            <span /><span /><span />
+          </button>
+        </div>
       </nav>
 
       {/* Mobile overlay menu */}
@@ -101,18 +113,16 @@ export default function Navbar() {
         {NAV_ITEMS.map(item => (
           <a
             key={item.href}
-            href={item.external ? item.href : item.href}
-            target={item.external ? "_blank" : "_self"}
-            rel={item.external ? "noreferrer" : ""}
-            onClick={() => {
-              if (!item.external) {
-                setMenuOpen(false);
-              }
-            }}
+            href={item.href}
+            onClick={() => { setActive(item.href); setMenuOpen(false); }}
           >
             {item.label}
           </a>
         ))}
+        <a href="/resume.pdf" target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}
+           style={{ color: 'var(--accent-1)', fontWeight: 800 }}>
+          📄 Resume
+        </a>
       </div>
     </>
   );

@@ -133,6 +133,26 @@ nav a:hover, .nav-links a:hover, .nav-links a.active {
 .hamburger.open span:nth-child(2) { opacity:0; }
 .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
 
+/* Resume button in navbar (desktop) */
+.nav-resume-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 18px; border-radius:100px; font-size:13px; font-weight:700;
+  background:linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color:#fff; text-decoration:none;
+  transition:transform .2s, box-shadow .2s;
+  box-shadow:0 4px 16px rgba(124,58,237,0.30);
+}
+.nav-resume-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(124,58,237,0.45); }
+
+/* Resume button on mobile (always visible in navbar) */
+.nav-resume-btn-mobile {
+  display:none;
+  padding:7px 14px; border-radius:100px; font-size:12px; font-weight:800;
+  background:linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color:#fff; text-decoration:none;
+  box-shadow:0 3px 12px rgba(124,58,237,0.30);
+}
+
 /* Mobile menu */
 .mobile-menu {
   display:none; position:fixed; inset:0;
@@ -567,6 +587,9 @@ h2 {
   section { padding:80px 5% 60px; }
   .nav-links { display:none; }
   .hamburger { display:flex; }
+  .nav-resume-btn { display:none; }           /* hide desktop resume btn */
+  .nav-resume-btn-mobile { display:inline-flex; } /* show mobile resume btn */
+
   .home-container { flex-direction:column-reverse; text-align:center; justify-content:center; min-height:100vh; padding-top:80px; gap:36px; }
   .hero-title { font-size:38px; }
   .hero-desc  { margin:0 auto 32px; }
